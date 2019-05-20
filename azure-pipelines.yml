@@ -42,7 +42,7 @@ steps:
   inputs:
     sourceFolder: '$(build.SourcesDirectory)'
     Contents: |
-     *.exe
+     *.out
      readme.txt
     targetFolder: $(build.ArtifactStagingDirectory)
 
