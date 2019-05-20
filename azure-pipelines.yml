@@ -3,12 +3,11 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-# Set variables once
+# Set variables 
 variables:
   a: mh
   b: $(Rev:.r)
   c: $(Build.SourceVersion)
-  BuildConfiguration : release
 
 name: $(a)_$(Rev:.r)_$(Build.SourceVersion)
 
@@ -19,20 +18,25 @@ pool:
   vmImage: 'ubuntu-16.04'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
 
 - script: sudo apt-get update
-- script: sudo apt-get install --no-upgrade libboost-all-dev 
-- script: g++ -std=c++11 -I/usr/include/boost/asio -I/usr/include/boost -o binary.out main.cpp connection.cpp connection_manager.cpp mime_types.cpp reply.cpp request_handler.cpp request_parser.cpp server.cpp -lboost_system -lboost_thread -lpthread
+  displayName: 'Perform update'
 
-- script: ls
+- script: sudo apt-get install --no-upgrade libboost-all-dev 
+  displayName: 'Install dependency'
+
+- script: g++ -std=c++11 -I/usr/include/boost/asio -I/usr/include/boost -o binary.out main.cpp connection.cpp connection_manager.cpp mime_types.cpp reply.cpp request_handler.cpp request_parser.cpp server.cpp -lboost_system -lboost_thread -lpthread
+  displayName: 'Build Program'
+
 
 - script: touch readme.txt
-- script: echo $(a)_$(b)_$(c) >> readme.txt
-- script: cat readme.txt
+  displayName: 'Create readme.txt file '
 
-#- powershell: gci env:* | sort-object name | Format-Table -AutoSize | Out-File $env:BUILD_ARTIFACTSTAGINGDIRECTORY/environment-variables.txt
+- script: echo $(a)_$(b)_$(c) >> readme.txt
+  displayName: 'Copy build name to readme.txt'
+
+- script: cat readme.txt
+  displayName: 'Display readme.txt'
 
 - task: CopyFiles@2
   inputs:
