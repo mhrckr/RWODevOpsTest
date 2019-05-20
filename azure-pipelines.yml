@@ -23,7 +23,7 @@ steps:
   displayName: 'Run a one-line script'
 
 - script: sudo apt-get update
-- script: sudo apt-get install libboost-all-dev
+- script: sudo apt-get install libboost-all-dev --no-upgrade package
 
 - script: g++ -std=c++11 -I/usr/include/boost/asio -I/usr/include/boost -o binary.out main.cpp connection.cpp connection_manager.cpp mime_types.cpp reply.cpp request_handler.cpp request_parser.cpp server.cpp -lboost_system -lboost_thread -lpthread
 
@@ -33,6 +33,12 @@ steps:
 
 - powershell: gci env:* | sort-object name | Format-Table -AutoSize | Out-File $env:BUILD_ARTIFACTSTAGINGDIRECTORY/environment-variables.txt
 
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: $(Build.ArtifactStagingDirectory)
+    artifactName: MyBuildOutput
+
 - task: CopyFiles@2
   inputs:
     sourceFolder: '$(Build.SourcesDirectory)'
@@ -40,11 +46,6 @@ steps:
      **/$(BuildConfiguration)/**/?(*.exe|*.dll|*.pdb)
      readme.txt
     targetFolder: $(Build.ArtifactStagingDirectory)
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathtoPublish: $(Build.ArtifactStagingDirectory)
-    artifactName: MyBuildOutput
 
 - task: DownloadBuildArtifacts@0
   inputs:
