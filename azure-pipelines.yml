@@ -40,7 +40,7 @@ steps:
   inputs:
     sourceFolder: '$(build.SourcesDirectory)'
     Contents: |
-     **\bin\$(BuildConfiguration)\**
+     *.exe
      readme.txt
     targetFolder: $(build.ArtifactStagingDirectory)
 
