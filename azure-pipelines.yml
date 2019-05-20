@@ -32,19 +32,22 @@ steps:
 
 - powershell: gci env:* | sort-object name | Format-Table -AutoSize | Out-File $env:BUILD_ARTIFACTSTAGINGDIRECTORY/environment-variables.txt
 
-
-- task: PublishBuildArtifacts@1
+- task: PublishSymbols@1
   inputs:
-    pathtoPublish: $(Build.ArtifactStagingDirectory)
-    artifactName: MyBuildOutput
+    SearchPattern: '**\bin**\*.exe'
 
 - task: CopyFiles@2
   inputs:
-    sourceFolder: '$(Build.SourcesDirectory)'
+    sourceFolder: '$(build.SourcesDirectory)'
     Contents: |
-     **/$(BuildConfiguration)/**/?(*.exe|*.dll|*.pdb)
+     **\bin\$(BuildConfiguration)\**
      readme.txt
-    targetFolder: $(Build.ArtifactStagingDirectory)
+    targetFolder: $(build.ArtifactStagingDirectory)
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: $(build.ArtifactStagingDirectory)
+    artifactName: MyBuildOutput
 
 - task: DownloadBuildArtifacts@0
   inputs:
