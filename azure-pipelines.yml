@@ -1,0 +1,54 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+# Set variables once
+variables:
+  a: mh
+  b: $(Rev:.r)
+  c: $(Build.SourceVersion)
+  BuildConfiguration : release
+
+name: $(a)_$(Rev:.r)_$(Build.SourceVersion)
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-16.04'
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- script: g++ -std=c++11 -I/usr/include/boost/asio -I/usr/include/boost -o binary.out main.cpp connection.cpp connection_manager.cpp mime_types.cpp reply.cpp request_handler.cpp request_parser.cpp server.cpp -lboost_system -lboost_thread -lpthread
+
+- script: sudo apt-get update
+- script: sudo apt-get install libboost-all-dev
+
+- script: touch readme.txt
+- script: echo $(a)_$(b)_$(c) >> readme.txt
+- script: cat readme.txt
+
+- powershell: gci env:* | sort-object name | Format-Table -AutoSize | Out-File $env:BUILD_ARTIFACTSTAGINGDIRECTORY/environment-variables.txt
+
+- task: CopyFiles@2
+  inputs:
+    sourceFolder: '$(Build.SourcesDirectory)'
+    Contents: |
+     .\bin\**\*.exe
+     readme.txt
+    targetFolder: $(Build.ArtifactStagingDirectory)
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: $(Build.ArtifactStagingDirectory)
+    artifactName: MyBuildOutput
+
+- task: DownloadBuildArtifacts@0
+  inputs:
+    buildType: 'current'
+    downloadType: 'single'
+    artifactName: 'MyBuildOutput'
+    downloadPath: '$(System.ArtifactsDirectory)'
