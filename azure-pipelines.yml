@@ -37,7 +37,7 @@ steps:
   inputs:
     sourceFolder: '$(Build.SourcesDirectory)'
     Contents: |
-     .\bin\**\*.exe
+     **/$(BuildConfiguration)/**/?(*.exe|*.dll|*.pdb)
      readme.txt
     targetFolder: $(Build.ArtifactStagingDirectory)
 
