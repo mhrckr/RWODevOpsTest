@@ -19,4 +19,4 @@ RUN pwd
 
 #COPY ../app/binary.out ./
 
-ENTRYPOINT ["./binary"]
+ENTRYPOINT ["/binary.out"]
