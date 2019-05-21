@@ -16,4 +16,6 @@ RUN g++ -std=c++11 -I/usr/include/boost/asio -I/usr/include/boost -o binary.out 
 
 RUN ls
 
+COPY *.out ./
+
 CMD ["./binary"]
