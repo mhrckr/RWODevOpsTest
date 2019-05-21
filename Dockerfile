@@ -19,4 +19,4 @@ RUN chmod 777 ./*.out
 
 #COPY ../app/binary.out ./
 
-cmd ["./binary.out","sh"]
+CMD ["./binary.out"]
