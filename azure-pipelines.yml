@@ -63,14 +63,3 @@ steps:
     artifactName: 'MyBuildOutput'
     downloadPath: '$(System.ArtifactsDirectory)' 
 
-
-# - script: docker login -u $(dockerId) -p $(dockerPswd) 
-#   displayName: 'Docker hub login'
-
-
-# - script: docker build -t $(dockerId)/test:$(imageName) .
-#   displayName: 'Docker build'
-
-# - script : docker push $(dockerId)/test:$(imageName)
-#   displayName: 'Docker push to docker hub '
-
