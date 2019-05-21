@@ -8,17 +8,16 @@ COPY . ./
 RUN apt-get update && \
       apt-get -y install sudo
 
-RUN sudo apt-get install build-essential -y && \
-      gcc -v
+RUN sudo apt-get install build-essential -y 
       
 RUN sudo apt-get install --no-upgrade libboost-all-dev -y
 
 RUN g++ -std=c++11 -I/usr/include/boost/asio -I/usr/include/boost -o binary.out main.cpp connection.cpp connection_manager.cpp mime_types.cpp reply.cpp request_handler.cpp request_parser.cpp server.cpp -lboost_system -lboost_thread -lpthread
 
-RUN echo '$(Build.ArtifactStagingDirectory)'
-RUN ls $(Build.ArtifactStagingDirectory)
-COPY $(Build.ArtifactStagingDirectory)/*.zip ./
+RUN ls
 
-RUN unzip ./*.zip
+COPY /app/out/*.out ./
+
+#RUN unzip ./*.zip
 
 RUN ./a.out
