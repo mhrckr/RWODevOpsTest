@@ -63,6 +63,10 @@ steps:
     artifactName: 'MyBuildOutput'
     downloadPath: '$(System.ArtifactsDirectory)' 
   
+- task: AzureRmWebAppDeployment@3
+  inputs: 
+    azureSubscription: 'mhrckr'
+    WebAppName: 'webapp'
 
 - task: GitHubRelease@0
   inputs:
