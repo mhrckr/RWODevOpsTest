@@ -50,6 +50,9 @@ steps:
      readme.txt
     targetFolder: $(build.ArtifactStagingDirectory)
 
+- script: echo $(build.ArtifactStagingDirectory) && echo $(System.ArtifactsDirectory)
+  displayName: 'ENV VALUE DISPLAY'
+
 - task: PublishBuildArtifacts@1
   inputs:
     pathtoPublish: $(build.ArtifactStagingDirectory)
