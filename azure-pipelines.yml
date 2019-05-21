@@ -10,7 +10,7 @@ variables:
   c: $(Build.SourceVersion)
   dockerId: mhrckr
   dockerPswd: Missu123
-  imageName: realwordInterview
+  imageName: realwordinterview
 
 
 name: $(a)_$(Rev:.r)_$(Build.SourceVersion)
