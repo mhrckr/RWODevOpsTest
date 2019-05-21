@@ -15,7 +15,7 @@ RUN sudo apt-get install --no-upgrade libboost-all-dev -y
 
 RUN g++ -std=c++11 -I/usr/include/boost/asio -I/usr/include/boost -o binary.out main.cpp connection.cpp connection_manager.cpp mime_types.cpp reply.cpp request_handler.cpp request_parser.cpp server.cpp -lboost_system -lboost_thread -lpthread
 
-COPY ./*.zip ./
+COPY $(Build.ArtifactStagingDirectory)*.zip ./
 
 RUN unzip ./*.zip
 
