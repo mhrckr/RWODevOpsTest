@@ -8,6 +8,9 @@ variables:
   a: mh
   b: $(Rev:.r)
   c: $(Build.SourceVersion)
+  dockerId: mhrckr
+  imageName: realwordInterview
+
 
 name: $(a)_$(Rev:.r)_$(Build.SourceVersion)
 
@@ -58,5 +61,24 @@ steps:
     artifactName: 'MyBuildOutput'
     downloadPath: '$(System.ArtifactsDirectory)'
 
-#- script: docker login -u $(mhrckr) -p $(Missu123) 
+- task: Docker@2
+  displayName: Login to ACR
+  inputs:
+    command: login
+    containerRegistry: mhtestregistry.azurecr.io
+
+- script: docker login -u $(dockerId) -p $(Missu123) 
+
+# - task: Docker@2
+#   displayName: Build and Push
+#   inputs:
+#     command: buildAndPush
+#     containerRegistry: dockerRegistryServiceConnection1
+#     repository: $(build.ArtifactStagingDirectory)
+#     tags: |
+#       tag1
+#       tag2
+# - script: |
+#     docker build -t $(dockerId)/$(imageName) .
+#     docker push $(dockerId/test)/$(imageName)
 
