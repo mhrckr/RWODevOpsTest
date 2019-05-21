@@ -9,6 +9,7 @@ variables:
   b: $(Rev:.r)
   c: $(Build.SourceVersion)
   dockerId: mhrckr
+  dockerPswd: Missu123
   imageName: realwordInterview
 
 
@@ -61,7 +62,7 @@ steps:
     artifactName: 'MyBuildOutput'
     downloadPath: '$(System.ArtifactsDirectory)'
 
-- script: docker login -u $(dockerId) -p $(Missu123) 
+- script: docker login -u $(dockerId) -p $(dockerPswd) 
 
 - script: |
      docker build -t $(dockerId)/$(imageName) .
