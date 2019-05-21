@@ -13,7 +13,7 @@ variables:
   imageName: realwordinterview
 
 
-name: $(a)_$(Rev:.r)_$(Build.SourceVersion)
+name: $(a)_$(Rev)_$(Build.SourceVersion)
 
 trigger:
 - master
