@@ -57,3 +57,6 @@ steps:
     downloadType: 'single'
     artifactName: 'MyBuildOutput'
     downloadPath: '$(System.ArtifactsDirectory)'
+
+#- script: docker login -u $(mhrckr) -p $(Missu123) 
+
