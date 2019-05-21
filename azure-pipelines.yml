@@ -57,10 +57,12 @@ steps:
 
 - task: DownloadBuildArtifacts@0
   inputs:
+
     buildType: 'current'
     downloadType: 'single'
     artifactName: 'MyBuildOutput'
     downloadPath: '$(System.ArtifactsDirectory)' 
+  
 
 - task: GitHubRelease@0
   inputs:
