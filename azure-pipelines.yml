@@ -61,6 +61,7 @@ steps:
     downloadType: 'single'
     artifactName: 'MyBuildOutput'
     downloadPath: '$(System.ArtifactsDirectory)'
+    branchName: 'refs/heads/master'
 
 # - script: docker login -u $(dockerId) -p $(dockerPswd) 
 #   displayName: 'Docker hub login'
