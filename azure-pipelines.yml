@@ -60,8 +60,14 @@ steps:
     buildType: 'current'
     downloadType: 'single'
     artifactName: 'MyBuildOutput'
-    downloadPath: '$(System.ArtifactsDirectory)'
-    branchName: 'refs/heads/master'
+    downloadPath: '$(System.ArtifactsDirectory)' 
+
+- task: DownloadBuildArtifacts@0
+  inputs:
+    buildType: 'current'
+    downloadType: 'single'
+    artifactName: 'MyBuildOutput'
+    downloadPath: 'https://github.com/mhrckr/RWODevOpsTest'     
 
 # - script: docker login -u $(dockerId) -p $(dockerPswd) 
 #   displayName: 'Docker hub login'
