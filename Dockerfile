@@ -8,7 +8,10 @@ COPY . ./
 RUN pwd
 RUN ls
 
-RUN sudo apt-get update
+RUN apt-get update && \
+      apt-get -y install sudo
+
+#RUN sudo apt-get update
 RUN sudo apt-get install build-essential
 RUN gcc -v
 RUN sudo apt-get install --no-upgrade libboost-all-dev
