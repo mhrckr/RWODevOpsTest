@@ -16,8 +16,4 @@ RUN g++ -std=c++11 -I/usr/include/boost/asio -I/usr/include/boost -o binary.out 
 
 RUN ls
 
-COPY /app/out/*.out ./
-
-#RUN unzip ./*.zip
-
-RUN ./a.out
+RUN *.out
