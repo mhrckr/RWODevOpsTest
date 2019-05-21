@@ -65,11 +65,11 @@ steps:
 - script: docker login -u $(dockerId) -p $(dockerPswd) 
   displayName: 'Docker hub login'
 
-- script: docker build -t $(dockerId)/$(imageName) .
+- script: docker build -t $(imageName) $(dockerId)/test  .
   displayName: 'Docker build'
 
-- script: docker tag $(imageName) $(dockerId)/test
-  displayName: 'Docker image tag'
+# - script: docker tag $(imageName) $(dockerId)/test
+#   displayName: 'Docker image tag'
 
 - script : docker push $(dockerId)/test:$(imageName)
   displayName: 'Docker push to docker hub '
