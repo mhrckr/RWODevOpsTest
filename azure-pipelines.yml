@@ -66,5 +66,5 @@ steps:
 
 - script: |
      docker build -t $(dockerId)/$(imageName) .
-     docker push $(dockerId/test)/$(imageName)
+     docker push $(dockerId)/test:$(imageName)
 
